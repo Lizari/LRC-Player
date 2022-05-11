@@ -1,0 +1,77 @@
+import type { NextPage } from 'next';
+import Header from '@/components/Header';
+import { useRef, useState } from 'react';
+import { LRC } from '@/entity/LRC';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import LyricsDisplay from '@/components/LyricsDisplay';
+import { Box, Button, ButtonGroup, Input } from '@mui/material';
+
+const Home: NextPage = () => {
+  const [lrc, setLRC] = useState<LRC>();
+  const [audio, setAudio] = useState<File>();
+  const lrcRef = useRef<HTMLInputElement>(null);
+  const audioRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <Box m={'auto'} width={'80%'}>
+      <Box>
+        <Header />
+      </Box>
+      <Box>
+        <LyricsDisplay lrc={lrc} audio={audio} />
+      </Box>
+      <Box
+        pt={3}
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        m={'auto'}
+      >
+        <ButtonGroup size={'large'} variant={'text'}>
+          <Button onClick={() => lrcRef.current?.click()}>LRC File</Button>
+          <Button onClick={() => audioRef.current?.click()}>Audio File</Button>
+        </ButtonGroup>
+      </Box>
+      <input
+        type={'file'}
+        style={{ display: 'none' }}
+        accept={'.lrc'}
+        multiple={false}
+        ref={lrcRef}
+        onChange={(e) => {
+          if (!e.target.files || !e.target.files[0]) return;
+          const file: File = e.target.files[0];
+          const data = new FormData();
+          data.append('file', file);
+
+          axios
+            .post('http://localhost:8080/lrc', data)
+            .then((res: AxiosResponse<LRC>) => {
+              return res.data;
+            })
+            .then((success: LRC) => {
+              setLRC(success);
+            })
+            .catch((e: AxiosError<{ error: string }>) => {
+              console.error(e);
+            });
+        }}
+      />
+      <input
+        type={'file'}
+        style={{ display: 'none' }}
+        multiple={false}
+        accept={'.mp3, .m4a'}
+        ref={audioRef}
+        onChange={(e) => {
+          if (!e.target.files || !e.target.files[0]) return;
+          const file: File = e.target.files[0];
+
+          setAudio(file);
+        }}
+      />
+    </Box>
+  );
+};
+
+export default Home;

@@ -31,7 +31,11 @@ const TimeIndicator: React.VFC<Props> = (props) => {
         value={props.time}
         step={500}
         min={0}
-        max={props.audio !== null ? props.audio.duration * 1000 : 0}
+        max={
+          props.audio !== null && !isNaN(props.audio?.duration)
+            ? props.audio.duration * 1000
+            : 0
+        }
         onChange={(_, value) => {
           if (props.audio !== null)
             props.audio.currentTime = (value as number) / 1000;

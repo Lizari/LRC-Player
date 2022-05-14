@@ -18,56 +18,52 @@ type Props = {
 };
 
 const MusicPlayer: React.VFC<Props> = (props) => {
-  const [index, setIndex] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const [isPlaying, setPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const timerRef = useRef<NodeJS.Timer | null>(null);
 
   useEffect(() => {
-    if (audioRef.current !== null && props.audio) {
+    if (audioRef.current !== null && props.audio)
       audioRef.current.src = URL.createObjectURL(props.audio);
-      audioRef.current.volume = 0.5;
-    }
   }, [props.audio]);
 
   useEffect(() => {
-    if (props.lrc !== undefined && isEmptyObject(props.lrc.lyrics[index])) {
-      const lyricTimestamp: number = parseInt(
+    if (props.lrc !== undefined) {
+      const nearKey: string = String(
+        getClosestNumber(
+          time,
+          props.lrc.lyrics
+            .map((data) => Object.keys(data)[0])
+            .map((str) => parseInt(str, 10)),
+        ),
+      );
+      const index: number = props.lrc.lyrics
+        .map((value) => {
+          return Object.keys(value)[0];
+        })
+        .indexOf(nearKey);
+      const lyricTimestamp: number = Number(
         Object.keys(props.lrc.lyrics[index])[0],
       );
-      const lyric: string | undefined = props.lrc.lyrics[index][lyricTimestamp];
+      const lyric: string = props.lrc.lyrics[index][lyricTimestamp];
 
-      if (lyric !== undefined && lyricTimestamp <= time) {
+      if (lyricTimestamp <= time) {
         props.setLyric(lyric);
-        setIndex((index) => index + 1);
       }
     }
   }, [time]);
 
-  const isEmptyObject = (value: any) => {
-    return (
-      value !== null && typeof value == 'object' && value.constructor === Object
-    );
-  };
-
   const play = () => {
-    if (timerRef.current !== null) return;
     setTimeout(() => {
       audioRef.current?.play().then(() => null);
       setPlaying(true);
-      timerRef.current = setInterval(() => {
-        setTime((time) => time + 500);
-      }, 500);
     }, 0);
   };
 
   const pause = () => {
-    if (timerRef.current === null) return;
     if (!audioRef.current?.ended) audioRef.current?.pause();
+
     setPlaying(false);
-    clearInterval(timerRef.current);
-    timerRef.current = null;
   };
 
   const toggleAudio = () => {
@@ -89,16 +85,16 @@ const MusicPlayer: React.VFC<Props> = (props) => {
       </Box>
       <audio
         ref={audioRef}
+        onPlay={() => play()}
+        onPause={() => pause()}
         onEnded={(_) => {
-          if (timerRef.current !== null) {
-            clearInterval(timerRef.current);
-            timerRef.current = null;
-          }
           setPlaying(false);
           setTime(0);
-          setIndex(0);
           props.setLyric('');
         }}
+        onTimeUpdate={(event) =>
+          setTime(Math.round(event.currentTarget.currentTime * 1000))
+        }
       />
     </Box>
   );

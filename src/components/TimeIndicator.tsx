@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Box } from '@mui/system';
 import {
-  ButtonGroup,
   IconButton,
   Slider,
   Stack,

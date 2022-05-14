@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { LRC } from '@/entity/LRC';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import LyricsDisplay from '@/components/LyricsDisplay';
-import { Box, Button, ButtonGroup, Input } from '@mui/material';
+import { Box, Button, ButtonGroup } from '@mui/material';
 
 const Home: NextPage = () => {
   const [lrc, setLRC] = useState<LRC>();
@@ -28,8 +28,27 @@ const Home: NextPage = () => {
         m={'auto'}
       >
         <ButtonGroup size={'large'} variant={'text'}>
-          <Button onClick={() => lrcRef.current?.click()}>LRC File</Button>
-          <Button onClick={() => audioRef.current?.click()}>Audio File</Button>
+          <Button
+            onClick={() => {
+              if (lrcRef.current !== null && lrcRef.current.files?.length !== 0)
+                lrcRef.current.value = '';
+              lrcRef.current?.click();
+            }}
+          >
+            LRC File
+          </Button>
+          <Button
+            onClick={() => {
+              if (
+                audioRef.current !== null &&
+                audioRef.current.files?.length !== 0
+              )
+                audioRef.current.value = '';
+              audioRef.current?.click();
+            }}
+          >
+            Audio File
+          </Button>
         </ButtonGroup>
       </Box>
       <input

@@ -4,7 +4,9 @@ import { useRef, useState } from 'react';
 import { LRC } from '@/entity/LRC';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import LyricsDisplay from '@/components/LyricsDisplay';
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup, Stack } from '@mui/material';
+import LyricsIcon from '@mui/icons-material/Lyrics';
+import FilePresentIcon from '@mui/icons-material/FilePresent';
 
 const Home: NextPage = () => {
   const [lrc, setLRC] = useState<LRC>();
@@ -13,22 +15,26 @@ const Home: NextPage = () => {
   const audioRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Box m={'auto'} width={'80%'}>
-      <Box>
-        <Header />
-      </Box>
-      <Box>
-        <LyricsDisplay lrc={lrc} audio={audio} />
-      </Box>
+    <Box width={'100vw'} height={'100vh'} bgcolor={'#000000'}>
+      <Header />
+      <LyricsDisplay lrc={lrc} audio={audio} />
       <Box
         pt={3}
         display={'flex'}
         alignItems={'center'}
         justifyContent={'center'}
-        m={'auto'}
       >
-        <ButtonGroup size={'large'} variant={'text'}>
+        <Stack direction={'row'}>
           <Button
+            size={'large'}
+            variant={'text'}
+            startIcon={<LyricsIcon />}
+            sx={{
+              color: 'gray',
+              '&:hover': {
+                color: '#FFFFFF',
+              },
+            }}
             onClick={() => {
               if (lrcRef.current !== null && lrcRef.current.files?.length !== 0)
                 lrcRef.current.value = '';
@@ -38,6 +44,15 @@ const Home: NextPage = () => {
             LRC File
           </Button>
           <Button
+            size={'large'}
+            variant={'text'}
+            startIcon={<FilePresentIcon />}
+            sx={{
+              color: 'gray',
+              '&:hover': {
+                color: '#FFFFFF',
+              },
+            }}
             onClick={() => {
               if (
                 audioRef.current !== null &&
@@ -49,7 +64,7 @@ const Home: NextPage = () => {
           >
             Audio File
           </Button>
-        </ButtonGroup>
+        </Stack>
       </Box>
       <input
         type={'file'}

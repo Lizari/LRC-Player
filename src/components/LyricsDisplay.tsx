@@ -12,16 +12,22 @@ const LyricsDisplay: React.VFC<Props> = (props) => {
   const [lyric, setLyric] = useState<string>('');
 
   return (
-    <Box m={'auto'} width={'70%'}>
+    <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
       <Box
         display={'flex'}
+        mt={15}
+        bgcolor={'gray'}
+        height={'50vh'}
+        width={'70%'}
         alignItems={'center'}
         justifyContent={'center'}
-        m={'auto'}
-        bgcolor={'gray'}
-        height={'40vh'}
       >
-        <Typography textAlign={'center'} color={'white'} variant={'h5'}>
+        <Typography
+          textAlign={'center'}
+          fontWeight={'light'}
+          fontSize={'42px'}
+          color={'#e7eaf6'}
+        >
           {lyric}
         </Typography>
       </Box>

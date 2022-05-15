@@ -2,11 +2,11 @@ import { NextPage } from 'next';
 import Header from '@/components/Header';
 
 const About: NextPage = () => {
-  return(
+  return (
     <div>
-      <Header/>
+      <Header />
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;

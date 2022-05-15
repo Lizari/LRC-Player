@@ -1,11 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Box } from '@mui/system';
-import {
-  IconButton,
-  Slider,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { IconButton, Slider, Stack, Typography } from '@mui/material';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
 import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -22,36 +17,8 @@ type Props = {
 
 const TimeIndicator: React.VFC<Props> = (props) => {
   return (
-    <Box sx={{ mt: 2 }} width={'60%'} m={'auto'}>
-      <Slider
-        aria-label={'time-indicator'}
-        size={'small'}
-        disabled={props.audio === null}
-        value={props.time}
-        step={500}
-        min={0}
-        max={
-          props.audio !== null && !isNaN(props.audio?.duration)
-            ? props.audio.duration * 1000
-            : 0
-        }
-        onChange={(_, value) => {
-          if (props.audio !== null)
-            props.audio.currentTime = (value as number) / 1000;
-          props.setTime(value as number);
-        }}
-      />
-      <Stack direction={'row'} justifyContent={'space-between'}>
-        <Typography fontSize={'0.75rem'} letterSpacing={0.2}>
-          {getConvertedTime(props.time)}
-        </Typography>
-        <Typography fontSize={'0.75rem'} letterSpacing={0.2}>
-          {getConvertedTime(
-            props.audio !== null ? props.audio.duration * 1000 : 0,
-          )}
-        </Typography>
-      </Stack>
-      <Stack sx={{ mb: 2 }} direction={'row'} justifyContent={'center'}>
+    <Box width={300}>
+      <Stack direction={'row'} justifyContent={'center'}>
         <IconButton
           disabled={props.audio === null}
           onClick={() => {
@@ -61,13 +28,17 @@ const TimeIndicator: React.VFC<Props> = (props) => {
             props.setTime((time) => (time - 5000 < 0 ? 0 : time - 5000));
           }}
         >
-          <FastRewindIcon />
+          <FastRewindIcon sx={{ color: '#e7eaf6' }} />
         </IconButton>
         <IconButton
           disabled={props.audio === null}
           onClick={() => props.toggleAudio()}
         >
-          {props.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+          {props.isPlaying ? (
+            <PauseIcon sx={{ color: '#e7eaf6' }} />
+          ) : (
+            <PlayArrowIcon sx={{ color: '#e7eaf6' }} />
+          )}
         </IconButton>
         <IconButton
           disabled={props.audio === null}
@@ -77,8 +48,37 @@ const TimeIndicator: React.VFC<Props> = (props) => {
             props.setTime((time) => time + 5000);
           }}
         >
-          <FastForwardIcon />
+          <FastForwardIcon sx={{ color: '#e7eaf6' }} />
         </IconButton>
+      </Stack>
+      <Stack direction={'row'} spacing={2} alignItems={'center'}>
+        <Typography fontSize={'0.75rem'} color={'#e7eaf6'} letterSpacing={0.2}>
+          {getConvertedTime(props.time)}
+        </Typography>
+        <Slider
+          aria-label={'time-indicator'}
+          size={'small'}
+          color={'primary'}
+          disabled={props.audio === null}
+          value={props.time}
+          step={500}
+          min={0}
+          max={
+            props.audio !== null && !isNaN(props.audio?.duration)
+              ? props.audio.duration * 1000
+              : 0
+          }
+          onChange={(_, value) => {
+            if (props.audio !== null)
+              props.audio.currentTime = (value as number) / 1000;
+            props.setTime(value as number);
+          }}
+        />
+        <Typography fontSize={'0.75rem'} color={'#e7eaf6'} letterSpacing={0.2}>
+          {getConvertedTime(
+            props.audio !== null ? props.audio.duration * 1000 : 0,
+          )}
+        </Typography>
       </Stack>
     </Box>
   );

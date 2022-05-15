@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { LRC } from '@/entity/LRC';
 import VolumeController from '@/components/VolumeController';
 import TimeIndicator from '@/components/TimeIndicator';
@@ -71,18 +71,24 @@ const MusicPlayer: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Box>
-      <Box>
-        <Typography variant={'h5'}>{props.lrc?.title}</Typography>
-        <TimeIndicator
-          audio={audioRef.current}
-          time={time}
-          isPlaying={isPlaying}
-          toggleAudio={toggleAudio}
-          setTime={setTime}
-        />
-        <VolumeController audio={audioRef.current} />
-      </Box>
+    <Stack
+      direction={'row'}
+      position={'fixed'}
+      bottom={0}
+      left={0}
+      right={0}
+      bgcolor={'#181818'}
+      justifyContent={'space-around'}
+      px={10}
+    >
+      <TimeIndicator
+        audio={audioRef.current}
+        time={time}
+        isPlaying={isPlaying}
+        toggleAudio={toggleAudio}
+        setTime={setTime}
+      />
+      <VolumeController audio={audioRef.current} />
       <audio
         ref={audioRef}
         onPlay={() => play()}
@@ -96,7 +102,7 @@ const MusicPlayer: React.VFC<Props> = (props) => {
           setTime(Math.round(event.currentTarget.currentTime * 1000))
         }
       />
-    </Box>
+    </Stack>
   );
 };
 

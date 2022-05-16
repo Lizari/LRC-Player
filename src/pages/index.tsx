@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const audioRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Box width={'100vw'} height={'100vh'} bgcolor={'#000000'}>
+    <Box mt={3}>
       <Header />
       <LyricsDisplay lrc={lrc} audio={audio} />
       <Box

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { LRC } from '@/entity/LRC';
 import { Box, Typography } from '@mui/material';
 import MusicPlayer from '@/components/MusicPlayer';

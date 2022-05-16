@@ -1,6 +1,6 @@
 import { Slider, Stack } from '@mui/material';
-import { VolumeDown, VolumeUp } from '@mui/icons-material';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { VolumeUp } from '@mui/icons-material';
+import React, { useState } from 'react';
 
 type Props = {
   audio: HTMLAudioElement | null;

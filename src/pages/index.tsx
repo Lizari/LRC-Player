@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { LRC } from '@/entity/LRC';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import LyricsDisplay from '@/components/LyricsDisplay';
-import { Box, Button, ButtonGroup, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import LyricsIcon from '@mui/icons-material/Lyrics';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
 

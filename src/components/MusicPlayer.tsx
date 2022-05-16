@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import { LRC } from '@/entity/LRC';
 import VolumeController from '@/components/VolumeController';
 import TimeIndicator from '@/components/TimeIndicator';

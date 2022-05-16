@@ -24,8 +24,9 @@ const TimeIndicator: React.VFC<Props> = (props) => {
           onClick={() => {
             if (props.audio !== null)
               props.audio.currentTime =
-                props.time - 5000 < 0 ? props.time : props.time - 5000;
-            props.setTime((time) => (time - 5000 < 0 ? 0 : time - 5000));
+                props.audio.currentTime - 5.0 < 0
+                  ? props.audio.currentTime
+                  : props.audio.currentTime - 5.0;
           }}
         >
           <FastRewindIcon sx={{ color: '#e7eaf6' }} />
@@ -44,8 +45,7 @@ const TimeIndicator: React.VFC<Props> = (props) => {
           disabled={props.audio === null}
           onClick={() => {
             if (props.audio !== null)
-              props.audio.currentTime = props.time + 5000;
-            props.setTime((time) => time + 5000);
+              props.audio.currentTime = props.audio.currentTime + 5.0;
           }}
         >
           <FastForwardIcon sx={{ color: '#e7eaf6' }} />

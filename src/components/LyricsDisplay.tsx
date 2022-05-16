@@ -15,7 +15,7 @@ const LyricsDisplay: React.VFC<Props> = (props) => {
     <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
       <Box
         display={'flex'}
-        mt={15}
+        mt={10}
         bgcolor={'gray'}
         height={'50vh'}
         width={'70%'}

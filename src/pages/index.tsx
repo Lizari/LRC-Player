@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const audioRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Box mt={3}>
+    <Box>
       <Header />
       <LyricsDisplay lrc={lrc} audio={audio} />
       <Box
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         alignItems={'center'}
         justifyContent={'center'}
       >
-        <Stack direction={'row'}>
+        <Stack direction={'row'} spacing={5}>
           <Button
             size={'large'}
             variant={'text'}

@@ -1,4 +1,7 @@
 const nextConfig = {
+  experimental: {
+    optimizeFonts: true,
+  },
   reactStrictMode: true,
 }
 

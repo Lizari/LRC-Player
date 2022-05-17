@@ -24,7 +24,8 @@ const LyricsDisplay: React.VFC<Props> = (props) => {
       >
         <Typography
           textAlign={'center'}
-          fontWeight={'light'}
+          fontWeight={700}
+          fontFamily={'Noto Sans JP, Arial'}
           fontSize={'42px'}
           color={'#e7eaf6'}
         >

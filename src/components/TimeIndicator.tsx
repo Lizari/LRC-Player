@@ -5,7 +5,7 @@ import FastRewindIcon from '@mui/icons-material/FastRewind';
 import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FastForwardIcon from '@mui/icons-material/FastForward';
-import { getConvertedTime } from '@/util/NumberExtractor';
+import { formatTime } from '@/util/NumberExtractor';
 
 type Props = {
   audio: HTMLAudioElement | null;
@@ -53,7 +53,7 @@ const TimeIndicator: React.VFC<Props> = (props) => {
       </Stack>
       <Stack direction={'row'} spacing={2} alignItems={'center'}>
         <Typography fontSize={'0.75rem'} color={'#e7eaf6'} letterSpacing={0.2}>
-          {getConvertedTime(props.time)}
+          {formatTime(props.time)}
         </Typography>
         <Slider
           aria-label={'time-indicator'}
@@ -75,9 +75,7 @@ const TimeIndicator: React.VFC<Props> = (props) => {
           }}
         />
         <Typography fontSize={'0.75rem'} color={'#e7eaf6'} letterSpacing={0.2}>
-          {getConvertedTime(
-            props.audio !== null ? props.audio.duration * 1000 : 0,
-          )}
+          {formatTime(props.audio !== null ? props.audio.duration * 1000 : 0)}
         </Typography>
       </Stack>
     </Box>

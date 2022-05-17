@@ -1,4 +1,7 @@
-export const getClosestNumber = (value: number, array: Array<number>) => {
+export const getClosestNumber = (
+  value: number,
+  array: Array<number>,
+): number => {
   return array.reduce((a, b) => {
     let aDiff = Math.abs(a - value);
     let bDiff = Math.abs(b - value);
@@ -8,7 +11,7 @@ export const getClosestNumber = (value: number, array: Array<number>) => {
   });
 };
 
-export const getConvertedTime = (time: number) => {
+export const formatTime = (time: number): string => {
   const minutes = isNaN(Math.floor(time / 60000))
     ? 0
     : Math.floor(time / 60000);

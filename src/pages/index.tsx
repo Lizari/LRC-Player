@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import Header from '@/components/Header';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { LRC } from '@/entity/LRC';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import LyricsDisplay from '@/components/LyricsDisplay';
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import LyricsIcon from '@mui/icons-material/Lyrics';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
 
@@ -21,50 +21,68 @@ const Home: NextPage = () => {
       <Box
         pt={3}
         display={'flex'}
+        flexDirection={'column'}
         alignItems={'center'}
         justifyContent={'center'}
       >
-        <Stack direction={'row'} spacing={5}>
-          <Button
-            size={'large'}
-            variant={'text'}
-            startIcon={<LyricsIcon />}
-            sx={{
-              color: 'gray',
-              '&:hover': {
-                color: '#FFFFFF',
-              },
-            }}
-            onClick={() => {
-              if (lrcRef.current !== null && lrcRef.current.files?.length !== 0)
-                lrcRef.current.value = '';
-              lrcRef.current?.click();
-            }}
+        {lrc !== undefined ? (
+          <Typography
+            fontSize={'x-large'}
+            color={'#e7eaf6'}
+            fontWeight={700}
+            fontFamily={'Noto Sans JP, Arial'}
           >
-            LRC File
-          </Button>
-          <Button
-            size={'large'}
-            variant={'text'}
-            startIcon={<FilePresentIcon />}
-            sx={{
-              color: 'gray',
-              '&:hover': {
-                color: '#FFFFFF',
-              },
-            }}
-            onClick={() => {
-              if (
-                audioRef.current !== null &&
-                audioRef.current.files?.length !== 0
-              )
-                audioRef.current.value = '';
-              audioRef.current?.click();
-            }}
-          >
-            Audio File
-          </Button>
-        </Stack>
+            {lrc.title}
+          </Typography>
+        ) : (
+          ''
+        )}
+        <Box>
+          <Stack direction={'row'} spacing={4}>
+            <Button
+              size={'large'}
+              variant={'text'}
+              startIcon={<LyricsIcon />}
+              sx={{
+                color: 'gray',
+                '&:hover': {
+                  color: '#FFFFFF',
+                },
+              }}
+              onClick={() => {
+                if (
+                  lrcRef.current !== null &&
+                  lrcRef.current.files?.length !== 0
+                )
+                  lrcRef.current.value = '';
+                lrcRef.current?.click();
+              }}
+            >
+              LRC File
+            </Button>
+            <Button
+              size={'large'}
+              variant={'text'}
+              startIcon={<FilePresentIcon />}
+              sx={{
+                color: 'gray',
+                '&:hover': {
+                  color: '#FFFFFF',
+                },
+              }}
+              onClick={() => {
+                if (
+                  audioRef.current !== null &&
+                  audioRef.current.files?.length !== 0
+                )
+                  audioRef.current.value = '';
+                audioRef.current?.click();
+              }}
+            >
+              Audio File
+            </Button>
+          </Stack>
+        </Box>
       </Box>
       <input
         type={'file'}

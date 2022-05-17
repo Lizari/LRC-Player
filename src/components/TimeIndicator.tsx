@@ -17,7 +17,7 @@ type Props = {
 
 const TimeIndicator: React.VFC<Props> = (props) => {
   return (
-    <Box width={300}>
+    <Box width={500}>
       <Stack direction={'row'} justifyContent={'center'}>
         <IconButton
           disabled={props.audio === null}

@@ -10,7 +10,16 @@ const VolumeController: React.VFC<Props> = (props) => {
   const [volume, setVolume] = useState<number>(50);
 
   return (
-    <Stack spacing={1} direction={'row'} alignItems={'center'} width={150}>
+    <Stack
+      position={'absolute'}
+      right={0}
+      top={'20px'}
+      spacing={1}
+      mr={'1rem'}
+      direction={'row'}
+      alignItems={'center'}
+      width={150}
+    >
       <VolumeUp sx={{ color: '#e7eaf6' }} />
       <Slider
         aria-label={'volume-controller'}

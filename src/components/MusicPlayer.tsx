@@ -78,7 +78,7 @@ const MusicPlayer: React.VFC<Props> = (props) => {
       left={0}
       right={0}
       bgcolor={'#181818'}
-      justifyContent={'space-around'}
+      justifyContent={'center'}
       px={10}
     >
       <TimeIndicator

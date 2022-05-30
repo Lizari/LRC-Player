@@ -22,12 +22,12 @@ const MusicPlayer: React.VFC<Props> = (props) => {
   const [isPlaying, setPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (audioRef.current !== null && props.audio)
       audioRef.current.src = URL.createObjectURL(props.audio);
   }, [props.audio]);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (props.lrc !== undefined) {
       const nearKey: string = String(
         getClosestNumber(
@@ -53,22 +53,28 @@ const MusicPlayer: React.VFC<Props> = (props) => {
     }
   }, [time]);
 
-  const play = () => {
-    setTimeout(() => {
+  const play = (): void => {
+    setTimeout((): void => {
       audioRef.current?.play().then(() => null);
       setPlaying(true);
     }, 0);
   };
 
-  const pause = () => {
+  const pause = (): void => {
     if (!audioRef.current?.ended) audioRef.current?.pause();
 
     setPlaying(false);
   };
 
-  const toggleAudio = () => {
+  const toggleAudio = (): void => {
     isPlaying ? pause() : play();
   };
+
+  const clear = (): void => {
+    setPlaying(false);
+    setTime(0);
+    props.setLyric('');
+  }
 
   return (
     <Stack
@@ -93,14 +99,11 @@ const MusicPlayer: React.VFC<Props> = (props) => {
         ref={audioRef}
         onPlay={() => play()}
         onPause={() => pause()}
-        onEnded={(_) => {
-          setPlaying(false);
-          setTime(0);
-          props.setLyric('');
-        }}
+        onEnded={() => clear()}
         onTimeUpdate={(event) =>
           setTime(Math.round(event.currentTarget.currentTime * 1000))
         }
+        onLoadStart={() => clear()}
       />
     </Stack>
   );

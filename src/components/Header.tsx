@@ -7,6 +7,7 @@ const Header: React.VFC = () => {
       <Link
         href={'/'}
         fontSize={'x-large'}
+        fontWeight={"700"}
         underline={'none'}
         sx={{
           color: '#808080',
@@ -20,6 +21,7 @@ const Header: React.VFC = () => {
       <Link
         href={'/about'}
         fontSize={'x-large'}
+        fontWeight={"700"}
         underline={'none'}
         sx={{
           color: '#808080',
@@ -29,19 +31,6 @@ const Header: React.VFC = () => {
         }}
       >
         About
-      </Link>
-      <Link
-        href={'/usage'}
-        fontSize={'x-large'}
-        underline={'none'}
-        sx={{
-          color: '#808080',
-          '&:hover': {
-            color: '#FFFFFF',
-          },
-        }}
-      >
-        Usage
       </Link>
     </Stack>
   );

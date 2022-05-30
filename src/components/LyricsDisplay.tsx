@@ -23,6 +23,7 @@ const LyricsDisplay: React.VFC<Props> = (props) => {
         justifyContent={'center'}
       >
         <Typography
+          mx={2}
           textAlign={'center'}
           fontWeight={700}
           fontFamily={'Noto Sans JP, Arial'}

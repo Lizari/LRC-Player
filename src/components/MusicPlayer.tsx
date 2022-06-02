@@ -15,6 +15,7 @@ type Props = {
   lrc: LRC | undefined;
   audio: File | undefined;
   setLyric: Dispatch<SetStateAction<string>>;
+  setIndex: Dispatch<SetStateAction<number>>;
 };
 
 const MusicPlayer: React.VFC<Props> = (props) => {
@@ -48,6 +49,7 @@ const MusicPlayer: React.VFC<Props> = (props) => {
       const lyric: string = props.lrc.lyrics[index][lyricTimestamp];
 
       if (lyricTimestamp <= time) {
+        props.setIndex(index);
         props.setLyric(lyric);
       }
     }
@@ -74,7 +76,7 @@ const MusicPlayer: React.VFC<Props> = (props) => {
     setPlaying(false);
     setTime(0);
     props.setLyric('');
-  }
+  };
 
   return (
     <Stack

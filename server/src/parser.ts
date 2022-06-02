@@ -59,7 +59,7 @@ export class LRCParser {
         execArray = lyricPattern.exec(line);
         if (execArray !== null) {
             const time: number = this.convertTime(execArray[1]);
-            const lyric: string = execArray[2];
+            const lyric: string = execArray[2] ? execArray[2] : "♪～";
             const obj: {[key: number]: string} = {};
 
             obj[time] = lyric;

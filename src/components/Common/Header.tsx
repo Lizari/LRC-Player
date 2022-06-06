@@ -28,7 +28,7 @@ const Header: React.VFC = () => {
           },
         }}
       >
-        <Stack textAlign={'center'} spacing={5}>
+        <Stack textAlign={'center'} spacing={3}>
           <Link
             href={'/'}
             fontSize={'x-large'}
@@ -45,7 +45,7 @@ const Header: React.VFC = () => {
           </Link>
           <Link
             href={'/about'}
-            fontSize={'large'}
+            fontSize={'x-large'}
             fontWeight={'700'}
             underline={'none'}
             sx={{
@@ -56,6 +56,20 @@ const Header: React.VFC = () => {
             }}
           >
             About
+          </Link>
+          <Link
+            href={'/setting'}
+            fontSize={'x-large'}
+            fontWeight={'700'}
+            underline={'none'}
+            sx={{
+              color: '#808080',
+              '&:hover': {
+                color: '#FFFFFF',
+              },
+            }}
+          >
+            Setting
           </Link>
         </Stack>
       </Drawer>

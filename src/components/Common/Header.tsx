@@ -24,7 +24,7 @@ const Header: React.VFC = () => {
           sx: {
             backgroundColor: '#181818',
             paddingTop: 3,
-            width: '20%',
+            width: '15%',
           },
         }}
       >

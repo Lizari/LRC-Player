@@ -15,7 +15,7 @@ type Props = {
   toggleAudio: () => void;
 };
 
-const TimeIndicator: React.VFC<Props> = (props) => {
+const TimeIndicator: React.FC<Props> = (props) => {
   return (
     <Box width={500}>
       <Stack direction={'row'} justifyContent={'center'}>

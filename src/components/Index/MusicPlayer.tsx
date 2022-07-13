@@ -18,7 +18,7 @@ type Props = {
   setIndex: Dispatch<SetStateAction<number>>;
 };
 
-const MusicPlayer: React.VFC<Props> = (props) => {
+const MusicPlayer: React.FC<Props> = (props) => {
   const [time, setTime] = useState<number>(0);
   const [isPlaying, setPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);

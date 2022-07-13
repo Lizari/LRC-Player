@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, IconButton, Link, Stack } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
-const Header: React.VFC = () => {
+const Header: React.FC = () => {
   const [isOpen, toggleDrawer] = useState(false);
 
   return (

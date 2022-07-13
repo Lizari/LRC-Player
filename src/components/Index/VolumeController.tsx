@@ -6,7 +6,7 @@ type Props = {
   audio: HTMLAudioElement | null;
 };
 
-const VolumeController: React.VFC<Props> = (props) => {
+const VolumeController: React.FC<Props> = (props) => {
   const [volume, setVolume] = useState<number>(50);
 
   return (

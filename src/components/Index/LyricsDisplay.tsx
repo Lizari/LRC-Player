@@ -8,7 +8,7 @@ type Props = {
   audio: File | undefined;
 };
 
-const LyricsDisplay: React.VFC<Props> = (props) => {
+const LyricsDisplay: React.FC<Props> = (props) => {
   const [index, setIndex] = useState<number>(0);
   const [lyric, setLyric] = useState<string>('');
   const [lyrics, setLyrics] = useState<{ [key: number]: string }[]>([]);
@@ -31,19 +31,35 @@ const LyricsDisplay: React.VFC<Props> = (props) => {
           {lyrics.map((value, i, array) => {
             if (Object.values(value)[0] == lyric) {
               return (
-                <LyricText
-                  key={i}
-                  lyric={Object.values(value)[0]}
-                  opacity={1}
-                />
+                <Typography
+                  m={'auto'}
+                  textAlign={'center'}
+                  fontWeight={700}
+                  fontFamily={'Noto Sans JP, Arial'}
+                  fontSize={'42px'}
+                  color={'#e7eaf6'}
+                  sx={{
+                    opacity: 1,
+                  }}
+                >
+                  {Object.values(value)[0]}
+                </Typography>
               );
             } else {
               return (
-                <LyricText
-                  key={i}
-                  lyric={Object.values(value)[0]}
-                  opacity={0.4}
-                />
+                <Typography
+                  m={'auto'}
+                  textAlign={'center'}
+                  fontWeight={700}
+                  fontFamily={'Noto Sans JP, Arial'}
+                  fontSize={'42px'}
+                  color={'#e7eaf6'}
+                  sx={{
+                    opacity: 0.4,
+                  }}
+                >
+                  {Object.values(value)[0]}
+                </Typography>
               );
             }
           })}
@@ -56,24 +72,6 @@ const LyricsDisplay: React.VFC<Props> = (props) => {
         setIndex={setIndex}
       />
     </Box>
-  );
-};
-
-const LyricText: React.VFC<{ lyric: string; opacity: number }> = (props) => {
-  return (
-    <Typography
-      m={'auto'}
-      textAlign={'center'}
-      fontWeight={700}
-      fontFamily={'Noto Sans JP, Arial'}
-      fontSize={'42px'}
-      color={'#e7eaf6'}
-      sx={{
-        opacity: props.opacity,
-      }}
-    >
-      {props.lyric}
-    </Typography>
   );
 };
 

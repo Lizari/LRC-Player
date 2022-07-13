@@ -1,9 +1,4 @@
 import { LRC } from '@/entity/LRC';
-import { breakpoints } from '@mui/system';
-import { exec } from 'child_process';
-import * as fs from 'fs';
-import { runInThisContext } from 'vm';
-
 export class LRCParser {
   private readonly context: string;
   private readonly tagsMap: { [key: string]: string };

@@ -1,5 +1,12 @@
 export type LRC = {
-  [key: string]: string | number | Array<{ [key: number]: string }>;
   title: string;
-  lyrics: Array<{ [key: number]: string }>;
+  artist: string;
+  album: string;
+  language: string;
+  length: string;
+  lrc_creator: string;
+  offset: number;
+  lrc_editor: string;
+  version: string;
+  lyrics: { [key: number]: string }[];
 };

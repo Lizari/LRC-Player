@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import Header from '@/components/Common/Header';
 import React, { useRef, useState } from 'react';
 import { LRC } from '@/entity/LRC';
-import axios, { AxiosError, AxiosResponse } from 'axios';
 import LyricsDisplay from '@/components/Index/LyricsDisplay';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import LyricsIcon from '@mui/icons-material/Lyrics';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
+import { LRCParser } from '@/util/parser';
 
 const Home: NextPage = () => {
   const [lrc, setLRC] = useState<LRC>();
@@ -90,23 +90,12 @@ const Home: NextPage = () => {
         accept={'.lrc'}
         multiple={false}
         ref={lrcRef}
-        onChange={(e) => {
+        onChange={async (e) => {
           if (!e.target.files || !e.target.files[0]) return;
           const file: File = e.target.files[0];
-          const data = new FormData();
-          data.append('file', file);
+          const parser = new LRCParser(await file.text());
 
-          axios
-            .post('http://localhost:8080/lrc', data)
-            .then((res: AxiosResponse<LRC>) => {
-              return res.data;
-            })
-            .then((success: LRC) => {
-              setLRC(success);
-            })
-            .catch((e: AxiosError<{ error: string }>) => {
-              console.error(e);
-            });
+          parser.parse().then(() => setLRC(parser.getLRC()));
         }}
       />
       <input

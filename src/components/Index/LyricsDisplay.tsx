@@ -15,7 +15,6 @@ const LyricsDisplay: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (props.lrc) setLyrics(getLyricsIndex(props.lrc.lyrics, index));
-    console.log(props.lrc?.lyrics);
   }, [lyric]);
 
   return (
@@ -28,8 +27,11 @@ const LyricsDisplay: React.FC<Props> = (props) => {
         overflow={'hidden'}
       >
         <Stack spacing={1} mt={9}>
-          {lyrics.map((value, i, array) => {
-            if (Object.values(value)[0] == lyric) {
+          {lyrics.map((value, i) => {
+            const currentLyric: string = Object.values(value)[0];
+            const highlightIndex = index > 2 ? 2 : index;
+
+            if (currentLyric === lyric && i === highlightIndex) {
               return (
                 <Typography
                   m={'auto'}
@@ -42,7 +44,7 @@ const LyricsDisplay: React.FC<Props> = (props) => {
                     opacity: 1,
                   }}
                 >
-                  {Object.values(value)[0]}
+                  {currentLyric}
                 </Typography>
               );
             } else {
@@ -58,7 +60,7 @@ const LyricsDisplay: React.FC<Props> = (props) => {
                     opacity: 0.4,
                   }}
                 >
-                  {Object.values(value)[0]}
+                  {currentLyric}
                 </Typography>
               );
             }
@@ -75,10 +77,10 @@ const LyricsDisplay: React.FC<Props> = (props) => {
   );
 };
 
-const getLyricsIndex = (array: { [key: number]: string }[], index: number) => {
-  return array.length > 5 && index > 3
-    ? array.slice(index - 2, index + 3)
-    : array.slice(0, index + 2);
+const getLyricsIndex = (lyrics: { [key: number]: string }[], index: number) => {
+  return lyrics.length > 5 && index > 1
+    ? lyrics.slice(index - 2, index + 3)
+    : lyrics.slice(0, index == 1 ? index + 4 : index + 5);
 };
 
 export default LyricsDisplay;

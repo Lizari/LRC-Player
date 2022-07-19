@@ -38,14 +38,17 @@ const MusicPlayer: React.FC<Props> = (props) => {
             .map((str) => parseInt(str, 10)),
         ),
       );
+
       const index: number = props.lrc.lyrics
         .map((value) => {
           return Object.keys(value)[0];
         })
         .indexOf(nearKey);
+
       const lyricTimestamp: number = Number(
         Object.keys(props.lrc.lyrics[index])[0],
       );
+
       const lyric: string = props.lrc.lyrics[index][lyricTimestamp];
 
       if (lyricTimestamp <= time) {

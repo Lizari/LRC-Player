@@ -7,7 +7,8 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import LyricsIcon from '@mui/icons-material/Lyrics';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
 import { LRCParser } from '@/util/parser';
-import { parse } from 'path';
+import LRCFileInputButton from '@/components/input/LRCFileInputButton';
+import AudioFileInputButton from '@/components/input/AudioFileInputButton';
 
 const Home: NextPage = () => {
   const [lrc, setLRC] = useState<LRC>();
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
         alignItems={'center'}
         justifyContent={'center'}
       >
-        {lrc !== undefined ? (
+        {lrc !== undefined && (
           <Typography
             fontSize={'x-large'}
             color={'#e7eaf6'}
@@ -35,8 +36,6 @@ const Home: NextPage = () => {
           >
             {lrc.title}
           </Typography>
-        ) : (
-          ''
         )}
         <Box>
           <Stack direction={'row'} spacing={4}>
@@ -110,31 +109,27 @@ const Home: NextPage = () => {
           </Stack>
         </Box>
       </Box>
-      <input
-        type={'file'}
-        style={{ display: 'none' }}
-        accept={'.lrc'}
-        multiple={false}
+      <LRCFileInputButton
         ref={lrcRef}
-        onChange={async (e) => {
-          if (!e.target.files || !e.target.files[0]) return;
-          const file: File = e.target.files[0];
-          const parser = new LRCParser(await file.text());
+        inputElementProps={{
+          onChange: async (e) => {
+            if (!e.target.files || !e.target.files[0]) return;
+            const file: File = e.target.files[0];
+            const parser = new LRCParser(await file.text());
 
-          parser.parse().then(() => setLRC(parser.getLRC()));
+            parser.parse().then(() => setLRC(parser.getLRC()));
+          },
         }}
       />
-      <input
-        type={'file'}
-        style={{ display: 'none' }}
-        multiple={false}
-        accept={'.mp3, .m4a'}
+      <AudioFileInputButton
         ref={audioRef}
-        onChange={(e) => {
-          if (!e.target.files || !e.target.files[0]) return;
-          const file: File = e.target.files[0];
+        inputElementProps={{
+          onChange: (e) => {
+            if (!e.target.files || !e.target.files[0]) return;
+            const file: File = e.target.files[0];
 
-          setAudio(file);
+            setAudio(file);
+          },
         }}
       />
     </Box>

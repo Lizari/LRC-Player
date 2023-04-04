@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Header from '@/components/Common/Header';
+import Header from '@/components/common/Header';
 import { Box, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LRC } from '@/entity/LRC';
 import { Box, Stack, Typography } from '@mui/material';
-import MusicPlayer from '@/components/Index/MusicPlayer';
+import MusicPlayer from '@/components/player/MusicPlayer';
 
 type Props = {
   lrc: LRC | undefined;

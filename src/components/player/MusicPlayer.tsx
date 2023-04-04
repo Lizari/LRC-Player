@@ -7,8 +7,8 @@ import React, {
 } from 'react';
 import { Stack } from '@mui/material';
 import { LRC } from '@/entity/LRC';
-import VolumeController from '@/components/Index/VolumeController';
-import TimeIndicator from '@/components/Index/TimeIndicator';
+import VolumeController from '@/components/player/VolumeController';
+import TimeIndicator from '@/components/player/TimeIndicator';
 import { getClosestNumber } from '@/util/NumberExtractor';
 
 type Props = {

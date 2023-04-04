@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Header from '@/components/Common/Header';
+import Header from '@/components/common/Header';
 import { Typography } from '@mui/material';
 
 const Setting: NextPage = () => {

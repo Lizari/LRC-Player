@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import Header from '@/components/Common/Header';
+import Header from '@/components/common/Header';
 import React, { useRef, useState } from 'react';
 import { LRC } from '@/entity/LRC';
-import LyricsDisplay from '@/components/Index/LyricsDisplay';
+import LyricsDisplay from '@/components/player/LyricsDisplay';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import LyricsIcon from '@mui/icons-material/Lyrics';
 import FilePresentIcon from '@mui/icons-material/FilePresent';

@@ -8,13 +8,15 @@ type Props = {
   audio: File | undefined;
 };
 
-const LyricsDisplay: React.FC<Props> = (props) => {
+const LyricsDisplay: React.FC<Props> = ({ lrc, audio }) => {
   const [index, setIndex] = useState<number>(0);
   const [lyric, setLyric] = useState<string>('');
   const [lyrics, setLyrics] = useState<{ [key: number]: string }[]>([]);
 
   useEffect(() => {
-    if (props.lrc) setLyrics(getLyricsIndex(props.lrc.lyrics, index));
+    if (lrc) {
+      setLyrics(getLyricsIndex(lrc.lyrics, index));
+    }
   }, [lyric]);
 
   return (
@@ -68,8 +70,8 @@ const LyricsDisplay: React.FC<Props> = (props) => {
         </Stack>
       </Box>
       <MusicPlayer
-        lrc={props.lrc}
-        audio={props.audio}
+        lrc={lrc}
+        audio={audio}
         setLyric={setLyric}
         setIndex={setIndex}
       />

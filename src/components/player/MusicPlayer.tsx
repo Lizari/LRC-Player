@@ -19,7 +19,7 @@ type Props = {
 };
 
 const MusicPlayer: React.FC<Props> = (props) => {
-  const [time, setTime] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -29,10 +29,10 @@ const MusicPlayer: React.FC<Props> = (props) => {
   }, [props.audio]);
 
   useEffect((): void => {
-    if (props.lrc !== undefined) {
+    if (props.lrc) {
       const nearKey: string = String(
         getClosestNumber(
-          time,
+          currentTime,
           props.lrc.lyrics
             .map((data) => Object.keys(data)[0])
             .map((str) => parseInt(str, 10)),
@@ -51,12 +51,12 @@ const MusicPlayer: React.FC<Props> = (props) => {
 
       const lyric: string = props.lrc.lyrics[index][lyricTimestamp];
 
-      if (lyricTimestamp <= time) {
+      if (lyricTimestamp <= currentTime) {
         props.setIndex(index);
         props.setLyric(lyric);
       }
     }
-  }, [time]);
+  }, [currentTime]);
 
   const play = (): void => {
     setTimeout((): void => {
@@ -77,7 +77,7 @@ const MusicPlayer: React.FC<Props> = (props) => {
 
   const clear = (): void => {
     setPlaying(false);
-    setTime(0);
+    setCurrentTime(0);
     props.setLyric('');
   };
 
@@ -94,10 +94,10 @@ const MusicPlayer: React.FC<Props> = (props) => {
     >
       <TimeIndicator
         audio={audioRef.current}
-        time={time}
+        time={currentTime}
         isPlaying={isPlaying}
         toggleAudio={toggleAudio}
-        setTime={setTime}
+        setTime={setCurrentTime}
       />
       <VolumeController audio={audioRef.current} />
       <audio
@@ -105,10 +105,10 @@ const MusicPlayer: React.FC<Props> = (props) => {
         onPlay={() => play()}
         onPause={() => pause()}
         onEnded={() => clear()}
-        onTimeUpdate={(event) =>
-          setTime(Math.round(event.currentTarget.currentTime * 1000))
-        }
         onLoadStart={() => clear()}
+        onTimeUpdate={(e) =>
+          setCurrentTime(Math.round(e.currentTarget.currentTime * 1000))
+        }
       />
     </Stack>
   );

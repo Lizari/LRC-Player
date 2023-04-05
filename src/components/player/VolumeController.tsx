@@ -32,7 +32,7 @@ const VolumeController: React.FC<Props> = (props) => {
         onChange={(_, value) => {
           setVolume(value as number);
           if (props.audio !== null)
-            props.audio.volume = (value as number) / 100;
+            props.audio.volume = (value as number) / 500;
         }}
       />
     </Stack>
